@@ -39,27 +39,106 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+    let inventorsFrom1500s = inventors.filter(i => i.year >= 1500 && i.year <= 1599);
+
+    console.log(inventorsFrom1500s);
+
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+
+    let firstAndLastNames = inventors.map(
+      ({ first, last } = i) =>
+      first + " " + last
+    );
+
+    console.log(firstAndLastNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    let sortedByBirthdate = inventors.sort(
+      (a, b) => {
+        if (a.year > b.year) return 1;
+        if (a.year < b.year) return -1;
+        return 0;
+      }
+    );
+
+    console.log(sortedByBirthdate);
+
+    let ordered = inventors.sort((a, b) => (a.year > b.year) ? 1 : -1);
+
+    console.log(ordered);
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    // for each element
+      // calculate how old they were
+      // age is the value added to the accumulator
+    let totalLivedYears = inventors.reduce(
+      (acc, curr) => acc + (curr.passed - curr.year), 0
+    );
+
+    console.log(totalLivedYears);
+
     // 5. Sort the inventors by years lived
+    let sortedByYearsLived = inventors.sort(
+      (a, b) => {
+        if ((a.passed - a.year) < (b.passed - b.year)) return -1;
+        if ((a.passed - a.year) > (b.passed - b.year)) return 1;
+        return 0;
+      }
+    );
+
+    console.log(sortedByYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
+
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    function getLastName(fullName) {
+      let names = fullName.split(', ');
+
+      return names[0];
+    }
+
+    let sortAlphabetically = people.sort(
+      (a, b) => {
+        aLastName = getLastName(a);
+        bLastName = getLastName(b);
+        if (aLastName < bLastName) return -1;
+        if (aLastName > bLastName) return 1;
+        0;
+      }
+    );
+
+    console.log(sortAlphabetically);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    // reduce, acc, curr (current word), 0;
+    // filter data by the current word
+    // add the length of the 
+    // for each unique word, sum up the count of each (filter by the unique word and get tally as the length of filtered array)
+    let transportationCount = data.reduce(
+      (obj, item) => {
+        console.log(item);
+        if (obj[item]) {
+          obj[item] += 1
+        } else {
+          obj[item] = 1;
+        }
+        return obj;
+      }, {}
+    );
+
+    console.log(transportationCount);
 
   </script>
 </body>
